@@ -13,11 +13,8 @@
 
 ### Association
  has_many:items
- belongs_to:user
  has_many:orders
- belongs_to:user
-
-
+ 
 ## items テーブル
 
 | Column    | Type       | Options                        |
@@ -25,18 +22,17 @@
 | name      | string     | null: false                    |
 | description| text       | null: false                   |
 | category_id| integer    | null: false                   |
-| status_id. | integer     | null: false                  |
-| shipping_cost_id.| integer | null: false                |
-| shipping_date_id.| integer | null: false                |
-|prefecture_id.| integer     | null: false                |
+| status_id | integer     | null: false                  |
+| shipping_cost_id| integer | null: false                |
+| shipping_date_id| integer | null: false                |
+|prefecture_id| integer     | null: false                |
 |price        | integer     | null: false                |
 |user        | references     | null: false,foreign_key: true|
 
 ### Association
-has_many:items
 belongs_to:user
 has_one:order
-belongs_to:item
+
 
 ## orders テーブル
 
@@ -46,18 +42,15 @@ belongs_to:item
 |user     | references | null: false, foreign_key: true |
 
 ### Association
-has_many:orders
 belongs_to:user
-has_one:order
 belongs_to:item
-belongs_to:order
 has_one:payment
 
 ## payments テーブル
 | Column    | Type       | Options                        |
 | --------- | ---------- | ---------------------------|
 | postcode  | string      | null: false               |
-|prefecture_id.| integer  | null: false               |
+|prefecture_id| integer  | null: false               |
 |city       | string      | null: false               |
 |block      | string      | null: false               |
 |building    | string       |                         |
@@ -66,4 +59,3 @@ has_one:payment
 
 ### Association
 belongs_to:order
-has_one:payment
