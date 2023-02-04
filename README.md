@@ -1,24 +1,61 @@
-# README
+## users テーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column             | Type   | Options    
+| ------------------ | ------ | ------------------------|
+| nickname           | string | null: false             |
+| email              | string | null: false             |
+| encrypted_password | string | null: false             |
+| first_name         | string | null: false             |
+| last_name          | string | null: false             |
+|first_name_kana     | string | null: false             |
+|last_name_kana      | string | null: false             |
+|birthday            | date   | null: false             |
 
-Things you may want to cover:
+### Association
+ has_many:items
+ has_many:orders
+ 
+## items テーブル
 
-* Ruby version
+| Column    | Type       | Options                        |
+| --------- | ---------- | -------------------------------|
+| name      | string     | null: false                    |
+| description| text       | null: false                   |
+| category_id| integer    | null: false                   |
+| status_id | integer     | null: false                  |
+| shipping_cost_id| integer | null: false                |
+| shipping_date_id| integer | null: false                |
+|prefecture_id| integer     | null: false                |
+|price        | integer     | null: false                |
+|user        | references     | null: false,foreign_key: true|
 
-* System dependencies
+### Association
+belongs_to:user
+has_one:order
 
-* Configuration
 
-* Database creation
+## orders テーブル
 
-* Database initialization
+| Column  | Type       | Options                        |
+| ------  | -----------| -------------------------------|
+|item     | references | null: false, foreign_key: true |
+|user     | references | null: false, foreign_key: true |
 
-* How to run the test suite
+### Association
+belongs_to:user
+belongs_to:item
+has_one:payment
 
-* Services (job queues, cache servers, search engines, etc.)
+## payments テーブル
+| Column    | Type       | Options                        |
+| --------- | ---------- | ---------------------------|
+| postcode  | string      | null: false               |
+|prefecture_id| integer  | null: false               |
+|city       | string      | null: false               |
+|block      | string      | null: false               |
+|building    | string       |                         |
+|phone_number    |string    |  null: false            |
+|order    |references | null: false, foreign_key: true|
 
-* Deployment instructions
-
-* ...
+### Association
+belongs_to:order
