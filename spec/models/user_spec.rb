@@ -53,13 +53,26 @@ describe 'ユーザー新規登録' do
     end
 
 
-    it 'password(確認を含む)が半角英数字の混合でないと登録できない' do
+    it 'password(確認を含む)が英字の場合は登録できない' do
+      @user.password='aaaaa'
+      @user.password_confirmation='aaaaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
+    end
+
+    it 'password(確認を含む)が数字の場合は登録できない' do
       @user.password='123456'
       @user.password_confirmation='123456'
       @user.valid?
       expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
     end
     
+    it 'password(確認を含む)が全角文字が含まれる場合は登録できない' do
+      @user.password='つ'
+      @user.password_confirmation='つ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
+    end
     
     it 'passwordとpassword_confirmationが不一致では登録できない' do
       @user.password = '123456'
@@ -95,7 +108,7 @@ describe 'ユーザー新規登録' do
 
 
     it 'first_nameは全角（漢字・ひらがな・カタカナ）でないと登録できない' do
-      @user.first_name = ''
+      @user.first_name = 'aaaaa'
       @user.valid?
       expect(@user.errors.full_messages).to include("First name is invalid")
     end
