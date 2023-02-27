@@ -25,12 +25,6 @@ class ItemsController < ApplicationController
       if @item.order
         redirect_to root_path
       end
-      
-      if @item.user_id==current_user.id 
-       
-      else
-        redirect_to root_path
-      end
     end
    
     def update
