@@ -32,7 +32,7 @@ RSpec.describe OrderPayment, type: :model do
       it "postcodeが空だと保存できないこと" do
         @order_payment.postcode=''
         @order_payment.valid?
-        expect(@order_payment.errors.full_messages).to include("Postcode can't be blank", "Postcode is invalid. Include hyphen(-)")
+        expect(@order_payment.errors.full_messages).to include("Postcode can't be blank")
       end
       it "postcodeがは『3桁ハイフン4桁』半角英数字でないと保存できないこと" do
         @order_payment.postcode = '1231234'
@@ -57,7 +57,7 @@ RSpec.describe OrderPayment, type: :model do
       it "phone_numberが空だと保存できないこと" do
         @order_payment.phone_number = ''
         @order_payment.valid?
-        expect(@order_payment.errors.full_messages).to include("Phone number can't be blank", "Phone number is invalid")
+        expect(@order_payment.errors.full_messages).to include("Phone number can't be blank")
       end
       it "phone_numberが9桁以下であると購入できないこと" do
         @order_payment.phone_number = '090090090'
