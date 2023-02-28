@@ -22,7 +22,9 @@ class ItemsController < ApplicationController
 
 
     def edit
-      
+      if @item.order
+        redirect_to root_path
+      end
     end
    
     def update
@@ -43,7 +45,9 @@ class ItemsController < ApplicationController
       else
         redirect_to root_path
       end
-     end
+    end
+
+     
   
   
   private
