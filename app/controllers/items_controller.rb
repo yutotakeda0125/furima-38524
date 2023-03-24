@@ -35,8 +35,10 @@ class ItemsController < ApplicationController
      end
     end
     
-    def show
-      
+    def show 
+      @user= @item.user
+      @comment=Comment.new
+      @comments=@item.comments.order(created_at: :desc)
     end
 
     def destroy
